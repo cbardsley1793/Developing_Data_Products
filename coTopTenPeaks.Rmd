@@ -1,0 +1,47 @@
+---
+title: "The Ten Highest Peaks in Colorado"
+author: "Cherie Bardsley"
+date: "September 27, 2018"
+output: html_document
+---
+
+```{r, echo=FALSE}
+library(leaflet)
+
+coTopTenPeaksIcon <- makeIcon("mountain.png", 36, 36)
+
+coTopTenPeaksLatLong <- data.frame(
+        lat = c(39.1178, 39.1875, 38.9244, 37.5775, 39.0294, 38.0717, 37.9669, 39.3515, 39.0097, 39.6339),
+        lng = c(-106.4454, -106.4757, -106.3207, -105.4856, -106.4729, -107.4621, -105.5855, -106.1116, -106.8614, -105.8176)
+)
+
+coTopTenPeaksLabel <- c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
+
+coTopTenPeaksPopup <- c(
+        "<a href='https://en.wikipedia.org/wiki/Mount_Elbert'>1. Mt. Elbert, 14,440 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/Mount_Massive'>2. Mt. Massive, 14,428 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/Mount_Harvard'>3. Mt. Harvard, 14,421 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/Blanca_Peak'>4. Blanca Peak, 14,351 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/La_Plata_Peak'>5. La Plata Peak, 14,343 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/Uncompahgre_Peak'>6. Uncompahgre Peak, 14,321 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/Crestone_Peak'>7. Crestone Peak, 14,300 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/Mount_Lincoln_(Colorado)'>8. Mt. Lincoln, 14,293 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/Castle_Peak_(Colorado)'>9. Castle Peak, 14,279 ft</a>",
+        "<a href='https://en.wikipedia.org/wiki/Grays_Peak'>10. Grays Peak, 14,278 ft</a>"
+)
+
+coTopTenPeaksLatLong %>%
+        leaflet(width = "100%") %>%
+        addTiles() %>%
+        setView(-106.2, 38.4, zoom = 7.5) %>%
+        addMarkers(icon=coTopTenPeaksIcon,
+                   popup = coTopTenPeaksPopup,
+                   label = coTopTenPeaksLabel,
+                   labelOptions = labelOptions(noHide = T, textOnly = T, direction = "bottom",
+                                               style = list(
+                                                       "color" = "#FFFF00",
+                                                       "font-size" = "18px",
+                                                       "font-weight" = "bold"))
+                   )
+```
+
